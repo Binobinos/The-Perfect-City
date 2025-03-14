@@ -1,6 +1,7 @@
 # resident.py
 # Created by Misha at 14.03.2025
 import random
+import time
 from enum import Enum
 
 from pydantic import BaseModel
@@ -18,6 +19,10 @@ class User(BaseModel):
     gender: Gender
 
 
+def chance(chance: int) -> bool:
+    return random.randint(1, 100) <= chance
+
+
 class Player():
     def __init__(self, name) -> None:
         """
@@ -28,7 +33,7 @@ class Player():
         self.x = 0
         self.y = 0
         self.name = name
-        self.age = 0
+        self.age = 1
         self.real_age = 0
         self.gender = random.choice(["Женщина", "Мужчина"])
         a = 0
@@ -55,3 +60,26 @@ class Player():
             self.blood_type = "AB+"
         elif randoms == 100:
             self.blood_type = "AB-"
+        self.__day = 0
+        self.immunity = 1
+
+    def Live_day(self) -> None:
+        """
+        Жизнь один день
+        :return: None
+        """
+        if not self.__day == 365:
+            self.__day += 1
+        else:
+            self.age += 1
+            self.__day = 1
+
+        print(f"День {self.__day} прожит, Возврат {self.age}")
+
+
+if __name__ == "__main__":
+    user = Player("Никита")
+    speed = 100
+    while True:
+        user.Live_day()
+        time.sleep(1 / speed)
