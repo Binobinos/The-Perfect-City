@@ -1,7 +1,6 @@
 # resident.py
 # Created by Misha at 14.03.2025
 import random
-import time
 from enum import Enum
 
 from pydantic import BaseModel
@@ -73,13 +72,5 @@ class Player():
         else:
             self.age += 1
             self.__day = 1
-
         print(f"День {self.__day} прожит, Возврат {self.age}")
 
-
-if __name__ == "__main__":
-    user = Player("Никита")
-    speed = 100
-    while True:
-        user.Live_day()
-        time.sleep(1 / speed)
